@@ -4,4 +4,8 @@ node_js:
   - 10
   - 12
   - node
+script:
+  - yarn lint
+  - yarn check
+  - yarn test
 cache: yarn

@@ -10,10 +10,10 @@
   "private": false,
   "scripts": {
     "lint": "eslint --ignore-pattern=*.json --quiet src --ext .ts",
+    "check": "tsc --noEmit",
     "postinstall": "tsc",
-    "prestart": "tsc",
-    "pretest": "tsc",
-    "format": "prettier --write --ignore-path .gitignore '**/*.{js,ts}' -l"
+    "format": "prettier --write --ignore-path .gitignore '**/*.{js,ts}' -l",
+    "test": "ava"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
