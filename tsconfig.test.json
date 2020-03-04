@@ -1,0 +1,6 @@
+{
+  "compilerOptions": { "noEmit": true },
+  "extends": "./tsconfig",
+  "include": ["src/**/*.test.ts"],
+  "exclude": []
+}

@@ -9,7 +9,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "lint": "eslint --ignore-pattern=*.json --quiet src tests --ext .js,.ts",
+    "lint": "eslint --ignore-pattern=*.json --quiet src --ext .ts",
     "postinstall": "tsc",
     "prestart": "tsc",
     "pretest": "tsc",
@@ -22,12 +22,14 @@
     "@types/validator": "^12.0.1",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
+    "ava": "^3.5.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.1",
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",
+    "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
   },
   "husky": {
@@ -43,5 +45,13 @@
   },
   "dependencies": {
     "validator": "^12.2.0"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   }
 }

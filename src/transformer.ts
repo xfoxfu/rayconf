@@ -10,7 +10,7 @@ export class TransformError extends Error {
     super(message);
     this.name = "TransformError";
     this.uiMsg = `${message}\n`;
-    this.uiMsg += `(required) ${option.desc}`;
+    this.uiMsg += `(required) ${option.desc ?? "No description provided."}`;
   }
 }
 

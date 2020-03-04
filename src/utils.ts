@@ -1,3 +1,6 @@
+const isUpper = (char: string): boolean =>
+  char === char.toUpperCase() && char !== char.toLowerCase();
+
 /**
  * convert property name in SnakeCase to UNDERSCORE_CASE
  * @param name the name to be converted
@@ -13,18 +16,17 @@ export const snakeToUnderscore = (name: string): string => {
   let sb = "";
   let state = SnakeCaseState.Start;
   for (let i = 0; i < name.length; i += 1) {
-    //             {
     if (name[i] === " ") {
       if (state !== SnakeCaseState.Start) {
         state = SnakeCaseState.NewWord;
       }
-    } else if (name[i] === name[i].toUpperCase()) {
+    } else if (isUpper(name[i])) {
       switch (state) {
         case SnakeCaseState.Upper: {
           const hasNext = i + 1 < name.length;
           if (i > 0 && hasNext) {
             const nextChar = name[i + 1];
-            if (!(nextChar === nextChar.toUpperCase()) && nextChar !== "_") {
+            if (!isUpper(nextChar) && nextChar !== "_") {
               sb += "_";
             }
           }
