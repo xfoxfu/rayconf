@@ -1,6 +1,6 @@
 # envclass
 
-Directly maps environmental variables to an annotated class with validations.
+Directly maps environmental variables to an annotated object with validations.
 
 ## License
 
