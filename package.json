@@ -11,7 +11,6 @@
   "scripts": {
     "lint": "eslint --ignore-pattern=*.json --quiet src --ext .ts",
     "check": "tsc --noEmit",
-    "postinstall": "tsc",
     "format": "prettier --write --ignore-path .gitignore '**/*.{js,ts}' -l",
     "test": "ava"
   },

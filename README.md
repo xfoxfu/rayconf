@@ -1,6 +1,18 @@
 # envclass
 
+[![Travis (.com)](https://img.shields.io/travis/com/xfoxfu/envconf?logo=travis&style=flat-square)](https://travis-ci.com/xfoxfu/envconf) ![GitHub](https://img.shields.io/github/license/xfoxfu/envconf?logo=github&style=flat-square)
+
 Directly maps environmental variables to an annotated object with validations.
+
+```typescript
+import { envconf, str, num, optional } from "envclass";
+
+const obj = envconf({
+  foo: str({ desc: "lorem ipsum" }), // foo maps from FOO
+  bar: optional(num()), // bar is optional and maps from BAR
+  lorem: { lipsum: str() }, // lorem.lipsum maps from LOREM_LIPSUM
+});
+```
 
 ## License
 
