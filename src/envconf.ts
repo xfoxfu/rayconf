@@ -2,7 +2,7 @@ import { PropertyTransformer, TransformError } from "./transformer";
 import { KVProvider, EnvVarProvider } from "./provider";
 
 /**
- * 配置对象的描述
+ * declaration of structure of configuration object
  */
 export type ConfigDef = {
   [k: string]: PropertyTransformer<unknown> | ConfigDef;
@@ -13,7 +13,7 @@ export type ConfigObj = {
 };
 
 /**
- * 根据描述构造对应的配置对象的类型
+ * get config object type from type of definition object
  */
 export type ConfigFromDef<T> = {
   [k in keyof T]: T[k] extends PropertyTransformer<infer V>
@@ -22,7 +22,7 @@ export type ConfigFromDef<T> = {
 };
 
 /**
- * 错误集合
+ * error collection
  */
 type ErrorCollection = {
   [k: string]: TransformError | undefined;
@@ -42,12 +42,12 @@ const _getValueFromProviders = (
 };
 
 /**
- * 递归生成配置对象
- * @param def 当前层的配置定义
- * @param result 当前层的配置对象
- * @param prev 上级的全部键
- * @param knownErrs 已知错误数组
- * @param kvProviders 配置数据来源
+ * generate config object recursively
+ * @param def definition on current layer
+ * @param result object on current layer
+ * @param prev all keys from upper layers
+ * @param knownErrs known errors
+ * @param kvProviders config data sources
  */
 const _exploreAndSet = (
   def: any, // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -56,28 +56,28 @@ const _exploreAndSet = (
   knownErrs: ErrorCollection,
   kvProviders: KVProvider[],
 ): void => {
-  // 遍历当前层对象
+  // iterate current layer
   for (const [key, keyDef] of Object.entries(def)) {
     const keyArr = [...prev, key];
-    // 如果是属性，则进行处理
+    // if it is a property
     if (keyDef instanceof PropertyTransformer) {
       try {
-        // 获得值
+        // acquire value
         const envVal = _getValueFromProviders(kvProviders, keyArr);
-        // 变换为目标格式
+        // transform into target type
         result[key] = keyDef.transform(envVal ?? undefined);
       } catch (err) {
-        // 发生错误则纪录到数组中
+        // if any error occurs, record it in the map
         knownErrs[keyArr.join(".")] = err;
       }
     } else if (typeof keyDef === "object") {
-      // 如果是嵌套对象，则递归处理
+      // if a nested object, handle recursively
       if (typeof result[key] !== "object") {
         result[key] = {};
       }
       _exploreAndSet(keyDef, result[key], keyArr, knownErrs, kvProviders);
     } else {
-      // 如果都不是，属于意料之外，是代码错误，直接抛出错误
+      // neither means an error in declaration
       throw new TypeError(
         `Expected instance of PropertyTransformer, got ${typeof keyDef} at ${keyArr.join(
           ".",
@@ -88,22 +88,22 @@ const _exploreAndSet = (
 };
 
 /**
- * 根据配置对象描述从环境变量中读取所需信息
- * @param def 配置对象描述
- * @param providers 配置数据提供者，按数组从前而后作为优先级
+ * read data according to definition and value providers
+ * @param def definition of config object
+ * @param providers value provider, ordered in the order of array, defaults to a single source from env var
  */
 export const envconf = <T extends ConfigDef>(
   def: T,
   providers: KVProvider[] = [new EnvVarProvider()],
 ): ConfigFromDef<T> => {
-  // 声明结果存储变量
+  // result storage
   const result: any = {}; // eslint-disable-line @typescript-eslint/no-explicit-any
   const knownErrs: ErrorCollection = {};
 
-  // 递归处理嵌套内容
+  // handle object recursively
   _exploreAndSet(def, result, [], knownErrs, providers);
 
-  // 处理过程中的错误，如有错误，输出提示并退出进程
+  // get all errors and output to the screen
   if (Object.keys(knownErrs).length > 0) {
     /* eslint-disable no-console */
     console.error("================================");
@@ -116,7 +116,6 @@ export const envconf = <T extends ConfigDef>(
     process.exit(1);
   }
 
-  // 返回结果
   return result;
 };
 

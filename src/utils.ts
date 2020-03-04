@@ -1,6 +1,6 @@
 /**
- * 将 SnakeCase 的属性名转变为 UNDERSCORE_CASE
- * @param name 需要转换的属性名
+ * convert property name in SnakeCase to UNDERSCORE_CASE
+ * @param name the name to be converted
  */
 export const snakeToUnderscore = (name: string): string => {
   enum SnakeCaseState {

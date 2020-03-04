@@ -16,15 +16,15 @@ export class TransformError extends Error {
 
 interface Options<T> {
   /**
-   * 描述可能取值的数组。
+   * optional array of possible values
    */
   choices?: T[];
   /**
-   * 设置变量的描述。
+   * optional description
    */
   desc?: string;
   /**
-   * 示例。
+   * optional example value (in string)
    */
   example?: string;
 }
