@@ -1,4 +1,4 @@
-export { envconf } from "./envconf";
+export { rayconf } from "./rayconf";
 export { KVProvider, EnvVarProvider, ConstProvider } from "./provider";
 export {
   TransformError,

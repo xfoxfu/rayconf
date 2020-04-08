@@ -92,7 +92,7 @@ const _exploreAndSet = (
  * @param def definition of config object
  * @param providers value provider, ordered in the order of array, defaults to a single source from env var
  */
-export const envconf = <T extends ConfigDef>(
+export const rayconf = <T extends ConfigDef>(
   def: T,
   providers: KVProvider[] = [new EnvVarProvider()],
 ): ConfigFromDef<T> => {
@@ -119,4 +119,4 @@ export const envconf = <T extends ConfigDef>(
   return result;
 };
 
-export default envconf;
+export default rayconf;
