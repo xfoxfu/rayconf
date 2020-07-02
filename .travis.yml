@@ -13,3 +13,5 @@ script:
   - yarn test
 after_success: yarn run coverage
 cache: yarn
+notifications:
+  webhooks: https://coveralls.io/webhook
