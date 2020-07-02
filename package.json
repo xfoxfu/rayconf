@@ -17,7 +17,8 @@
     "lint": "eslint --ignore-pattern=*.json --quiet src --ext .ts",
     "check": "tsc --noEmit",
     "format": "prettier --write --ignore-path .gitignore '**/*.{js,ts}' -l",
-    "test": "ava"
+    "test": "nyc --reporter=html --reporter=text ava",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
@@ -27,11 +28,13 @@
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
     "ava": "^3.5.0",
+    "coveralls": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.1",
     "lint-staged": "^10.0.7",
+    "nyc": "^15.1.0",
     "prettier": "^1.19.1",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
