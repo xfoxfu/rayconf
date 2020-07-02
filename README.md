@@ -1,6 +1,6 @@
 # rayconf
 
-[![Travis (.com)](https://img.shields.io/travis/com/xfoxfu/rayconf?logo=travis&style=flat-square)](https://travis-ci.com/xfoxfu/rayconf) ![GitHub](https://img.shields.io/github/license/xfoxfu/rayconf?logo=github&style=flat-square)
+[![Travis (.com)](https://img.shields.io/travis/com/xfoxfu/rayconf?logo=travis&style=flat-square)](https://travis-ci.com/xfoxfu/rayconf) ![GitHub](https://img.shields.io/github/license/xfoxfu/rayconf?logo=github&style=flat-square) [![Coveralls github](https://img.shields.io/coveralls/github/xfoxfu/rayconf?style=flat-square)](https://coveralls.io/github/xfoxfu/rayconf)
 
 Directly maps environmental variables to an annotated object with validations.
 
