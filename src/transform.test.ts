@@ -18,7 +18,11 @@ test("TransformError", t => {
 });
 
 test.todo("TransformError with description");
-test.todo("str");
+test("str", t => {
+  t.is(str({}).transform("123"), "123");
+  t.throws(() => str({ choices: ["foo", "bar"] }).transform("foobar"));
+  t.is(str({ choices: ["foo", "bar"] }).transform("foo"), "foo");
+});
 test.todo("email");
 test.todo("uri");
 test.todo("bool");
